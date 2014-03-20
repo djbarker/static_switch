@@ -21,7 +21,7 @@ where additional cases are provided by specializing the template class `CPP_type
 Therefore I wrote a meta-function called `static_switch` which recreates this behaviour but syntactically looks much more like the usual `switch` statement. The use of `static_switch` maintains the readability of the code. Using `static_switch` the example above becomes
 
 ```C++
-#define SOME_VALUE
+#define SOME_VALUE 0
 
 using some_type = static_switch<SOME_VALUE
 				,int // default case
