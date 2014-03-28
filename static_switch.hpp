@@ -26,3 +26,25 @@ struct static_switch<I,DefaultType,LastCase> {
 					DefaultType
 				     >::type;
 };
+
+template<class I,class T>
+struct static_type_case {
+	using value = I;
+	using type = T;
+};
+
+template<class I, class DefaultType, class Case1, class... OtherCases>
+struct static_type_switch{
+	using type = typename std::conditional< std::is_same<I,typename Case1::value>::value , 
+					typename Case1::type,
+					typename static_type_switch<I,DefaultType,OtherCases...>::type
+				     >::type;
+};
+
+template<class I, class DefaultType, class LastCase>
+struct static_type_switch<I,DefaultType,LastCase> {
+	using type = typename std::conditional< std::is_same<I,typename LastCase::value>::value , 
+					typename LastCase::type,
+					DefaultType
+				     >::type;
+};
